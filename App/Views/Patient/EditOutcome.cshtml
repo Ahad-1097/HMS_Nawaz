@@ -1,0 +1,92 @@
+﻿@model App.Models.ViewModel.PatientViewModel
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12">
+        <div class="card">
+
+            <div class="card-body">
+                <div class="basic-form">
+                    <form id="AddOutcomeForm">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="hidden" asp-for="InvestigationModel.Id" class="form-control" />
+                                <h4>Day</h4>
+                                <input asp-for="Outcome.Date" class="form-control" />
+                                <span asp-validation-for="Outcome.Date" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="doctor">Select Outcome</label>
+
+                                <select id="outcome" asp-for=Outcome.outcomeType class="form-control" name="outcome">
+                                    <option value="Discharged">Discharged</option>
+                                    <option value="LAMA">LAMA</option>
+                                    <option value="Absconded">Absconded</option>
+                                    <option value="Transferred">Transferred</option>
+                                    <option value="Death">Death</option>
+                                </select>
+                                @*@Html.DropDownList("outcomeType", ViewBag.OutcomeType as SelectList, "Select Outcome Type", new { @class = "form-control" })
+                                *@
+                            </div>
+                        </div>
+                        <div class="alert alert-primary" role="alert" id="OutcomeSuccessMessage" style="display: none;"></div>
+                        <div class="alert alert-warning" role="alert" id="OutcomeErrorMessage" style="display: none;"></div>
+                        <input type="button" id="OutcomeBtn" class="btn btn-primary" value="Save" />
+                        <input type="hidden" name="OutcomeModelsJson" id="OutcomeModelsJson" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@* <script>
+
+    $(document).ready(function () {
+
+        $("#OutcomeeditBtn").click(function () {
+
+            debugger
+            var patientId = $("#InvestigationModel_Id").val();
+            var Date = $("#Outcome_Date").val();
+            var Outcome = $("#outcomeType").val();
+
+            // Create an object with the values
+            var outcomeData = {
+                PatientId: patientId,
+                Date: Date,
+                Outcome: Outcome
+                // Add other properties as needed
+            };
+
+            if (PatientId > 0) {
+
+                // Perform Ajax call
+                $.ajax({
+                    url: '/Patient/Outcome',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(outcomeData),
+                    success: function (response) {
+                        // Handle success response
+                        console.log(response);
+                        $("#OutcomeSuccessMessage").text(response).show();
+                    },
+                    error: function (error) {
+                        // Handle error response
+                        console.log(error);
+                        $("#OutcomeErrorMessage").text('Error saving outcome.').show();
+                    }
+                });
+            }
+            
+        });
+    });
+          
+    });
+</script> *@
+
